@@ -219,20 +219,66 @@ colors: {
 - **无后端**: 不收集用户信息
 - **离线可用**: 无需网络连接
 
-## 🚢 部署建议
+## 🚢 部署指南
 
-### 静态托管
-- Vercel (推荐)
-- Netlify
-- GitHub Pages
+项目支持**多种云平台部署**，选择最适合你的方式：
 
-### 配置步骤
+### 🌟 推荐部署方案
+
+| 平台 | 难度 | 速度 | 成本 | 适合场景 |
+|------|------|------|------|----------|
+| **Vercel** | ⭐ | ⚡⚡⚡ | 免费 | 个人项目、快速部署 |
+| **Netlify** | ⭐ | ⚡⚡⚡ | 免费 | 静态网站、CI/CD |
+| **GitHub Pages** | ⭐⭐ | ⚡⚡ | 免费 | 开源项目 |
+| **Docker** | ⭐⭐⭐ | ⚡⚡ | 自托管 | 生产环境 |
+
+### 🚀 一键部署
+
+#### Vercel (最简单)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/hbpc002/grade3-learning-assistant)
+
+#### Netlify
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository-url=https://github.com/hbpc002/grade3-learning-assistant)
+
+### 📝 手动部署
+
+#### 1. Vercel CLI
 ```bash
-# 1. 构建
-npm run build
-
-# 2. 部署 dist/ 目录到静态托管服务
+npm i -g vercel
+vercel login
+vercel --prod
 ```
+
+#### 2. Netlify CLI
+```bash
+npm i -g netlify-cli
+netlify login
+npm run build
+netlify deploy --prod --dir=dist
+```
+
+#### 3. GitHub Pages
+项目已包含 `.github/workflows/deploy-to-github-pages.yml`
+- 推送代码自动部署
+- 在 Settings → Pages 中启用
+
+#### 4. Docker
+```bash
+# 使用 Docker Compose
+docker-compose up -d
+
+# 或手动构建
+docker build -t learning-app .
+docker run -d -p 8080:80 learning-app
+```
+
+### 🔧 详细部署文档
+查看 [DEPLOYMENT.md](./DEPLOYMENT.md) 获取完整部署指南，包括：
+- 各平台详细配置
+- 自定义域名设置
+- 环境变量配置
+- 性能优化建议
+- 常见问题解决
 
 ## 🤝 贡献指南
 

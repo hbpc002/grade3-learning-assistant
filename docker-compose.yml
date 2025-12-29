@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  learning-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: grade3-learning-assistant
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.grade3-learning-assistant.description=小学三年级学习助手"
+      - "com.grade3-learning-assistant.version=1.0.0"
+      - "com.grade3-learning-assistant.author=hbpc002"
+
+# 持久化卷（如果需要日志）
+volumes:
+  nginx-logs:
+    driver: local

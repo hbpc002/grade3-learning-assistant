@@ -1,0 +1,29 @@
+# 忽略不需要的文件
+node_modules
+npm-debug.log
+yarn-error.log
+.git
+.gitignore
+README.md
+QUICKSTART.md
+PROJECT_SUMMARY.md
+PUSH_TO_GITHUB.md
+push.sh
+push_ssh.sh
+.env
+.env.local
+.env.production
+.DS_Store
+.vscode
+.idea
+*.md
+*.log
+*.tmp
+
+# 构建产物（虽然会重新构建）
+dist
+build
+
+# 开发文件
+coverage
+.nyc_output

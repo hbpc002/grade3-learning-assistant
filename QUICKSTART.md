@@ -137,12 +137,43 @@ A: 清除浏览器缓存或使用隐身模式。
 - 字体大小
 - 动画效果
 
+## 🚀 部署上线
+
+### 一键部署（推荐）
+```bash
+# 运行部署脚本
+./deploy.sh
+
+# 然后选择平台：
+# 1) Vercel - 最简单
+# 2) Netlify - 功能丰富
+# 3) GitHub Pages - 开源友好
+# 4) Docker - 自托管
+```
+
+### 手动部署
+```bash
+# 1. 构建项目
+npm run build
+
+# 2. 上传 dist/ 目录到：
+#    - Vercel: 拖拽 dist 到控制台
+#    - Netlify: 拖拽 dist 到控制台
+#    - 云服务器: scp -r dist/* user@server:/var/www/html
+```
+
+### 访问地址
+- **本地开发**: http://localhost:3000
+- **Docker部署**: http://localhost:8080
+- **云部署**: 根据平台提供的域名
+
 ## 📞 技术支持
 
 如遇到问题：
 1. 检查控制台错误
 2. 确认依赖已安装
 3. 重启开发服务器
+4. 查看详细文档: [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ---
 

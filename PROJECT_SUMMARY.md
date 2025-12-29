@@ -174,16 +174,38 @@ PublicRoute: 未登录用户重定向到登录
 
 ## 🚀 部署和扩展
 
-### 部署选项
-1. **静态托管**: Vercel、Netlify、GitHub Pages
-2. **全栈扩展**: 可添加后端API
-3. **PWA**: 可转换为PWA应用
+### 🌟 云平台部署（已配置）
+项目已为以下平台准备了一键部署配置：
+
+| 平台 | 配置文件 | 部署方式 | 难度 |
+|------|----------|----------|------|
+| **Vercel** | `vercel.json` | CLI / GitHub | ⭐ |
+| **Netlify** | `netlify.toml` | CLI / GitHub | ⭐ |
+| **GitHub Pages** | `.github/workflows/...` | 自动化 | ⭐⭐ |
+| **Docker** | `Dockerfile` + `docker-compose.yml` | 自托管 | ⭐⭐⭐ |
+
+### 快速部署
+```bash
+# 使用部署脚本
+./deploy.sh
+
+# 或手动选择
+npm run build          # 构建项目
+docker-compose up -d   # Docker部署
+```
+
+### 部署说明
+1. **Vercel/Netlify**: 一键部署，自动HTTPS
+2. **GitHub Pages**: 自动化工作流，免费
+3. **Docker**: 完全控制，生产就绪
+4. **其他云**: 支持阿里云、腾讯云、AWS等
 
 ### 扩展方向
 1. **内容扩展**: 添加更多课程和游戏
 2. **社交功能**: 排行榜、好友系统
 3. **家长面板**: 学习报告、进度追踪
 4. **AI助手**: 个性化学习推荐
+5. **后端集成**: 用户系统、数据同步
 
 ## 📈 性能指标
 
