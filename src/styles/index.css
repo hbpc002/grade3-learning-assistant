@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义样式 */
+@layer base {
+  body {
+    @apply bg-slate-50;
+  }
+
+  /* 儿童友好的滚动条 */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+
+  /* 链接样式 */
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  /* 按钮点击效果 */
+  button:active {
+    transform: scale(0.95);
+  }
+
+  /* 卡片悬停效果 */
+  .card-hover {
+    @apply hover:shadow-xl hover:scale-[1.02] transition-all duration-200;
+  }
+
+  /* 文本选择颜色 */
+  ::selection {
+    @apply bg-blue-200;
+  }
+
+  /* 禁用选择的文本（用于游戏） */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+@layer components {
+  /* 教育应用专用按钮 */
+  .btn-educational {
+    @apply px-6 py-3 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all active:scale-95;
+  }
+
+  .btn-chinese {
+    @apply bg-blue-500 text-white hover:bg-blue-600;
+  }
+
+  .btn-math {
+    @apply bg-green-500 text-white hover:bg-green-600;
+  }
+
+  .btn-english {
+    @apply bg-yellow-500 text-black hover:bg-yellow-600;
+  }
+
+  /* 进度条动画 */
+  .progress-bar {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  /* 成就徽章 */
+  .achievement-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md;
+  }
+
+  /* 响应式容器 */
+  .container-responsive {
+    @apply max-w-6xl mx-auto px-4;
+  }
+}
+
+/* 动画类 */
+@keyframes bounce-small {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-bounce-small {
+  animation: bounce-small 0.5s ease-in-out 2;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 游戏专用样式 */
+.game-card {
+  @apply bg-white rounded-lg border-2 border-gray-200 shadow-md hover:shadow-xl transition-all cursor-pointer select-none;
+}
+
+.game-card.flipped {
+  @apply bg-blue-100 border-blue-500 transform scale-105;
+}
+
+.game-card.matched {
+  @apply bg-green-100 border-green-500 opacity-50 cursor-not-allowed;
+}
+
+/* 响应式断点优化 */
+@media (max-width: 768px) {
+  .mobile-large-text {
+    font-size: 1.125rem;
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .btn-educational {
+    @apply border-2 border-black;
+  }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

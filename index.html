@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小学三年级学习助手</title>
+    <meta name="description" content="寓教于乐的小学三年级学习平台，包含数学、语文、科学课程，游戏化练习，视频教学" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: #f8fafc;
+      }
+
+      /* 儿童友好的字体大小 */
+      html {
+        font-size: 16px;
+      }
+
+      @media (max-width: 768px) {
+        html {
+          font-size: 14px;
+        }
+      }
+
+      /* 加载动画 */
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 1.5rem;
+        color: #3b82f6;
+      }
+
+      .loading::after {
+        content: '...';
+        animation: dots 1.5s steps(4, end) infinite;
+      }
+
+      @keyframes dots {
+        0%, 20% { content: '.'; }
+        40% { content: '..'; }
+        60%, 100% { content: '...'; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="loading">正在加载学习助手</div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
