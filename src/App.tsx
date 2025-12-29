@@ -20,6 +20,22 @@ import { useUserStore } from '@/stores/user-store'
 // 创建Query Client
 const queryClient = new QueryClient()
 
+// 获取basename（用于GitHub Pages等部署场景）
+const getBasename = () => {
+  // 如果是生产环境且不是根目录，使用当前路径作为basename
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+    const path = window.location.pathname;
+    // 如果路径包含仓库名（如 /grade3-learning-assistant/），则使用它
+    if (path.includes('grade3-learning-assistant') && !path.endsWith('grade3-learning-assistant/')) {
+      const parts = path.split('/').filter(p => p);
+      if (parts.length > 0) {
+        return '/' + parts[0];
+      }
+    }
+  }
+  return '/'
+}
+
 // 路由守卫组件
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const user = useUserStore(state => state.user)
@@ -108,9 +124,11 @@ function AppRoutes() {
 }
 
 function App() {
+  const basename = getBasename()
+
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <Router basename={basename}>
         <AppLayout>
           <AppRoutes />
           <ToastContainer />

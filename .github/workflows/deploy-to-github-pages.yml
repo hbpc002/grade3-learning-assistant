@@ -2,7 +2,7 @@
 name: Deploy to GitHub Pages
 
 on:
-  # 推送到 main 分支时触发
+  # 推送到 master 分支时触发
   push:
     branches: [ master ]
 
@@ -38,8 +38,15 @@ jobs:
       - name: 📦 安装依赖
         run: npm ci
 
-      - name: 🏗️ 构建项目
-        run: npm run build
+      - name: 🏗️ 构建项目 (GitHub Pages)
+        run: |
+          # 为GitHub Pages设置基础路径
+          export BASE_URL="/${{ github.event.repository.name }}"
+          npm run build
+
+      - name: 📋 复制 404 页面
+        run: |
+          cp 404.html dist/
 
       - name: 📤 上传构建产物
         uses: actions/upload-pages-artifact@v3

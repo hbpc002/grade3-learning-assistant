@@ -18,7 +18,7 @@ export const QuizGame: React.FC<QuizGameProps> = ({ questions, gameId, subject }
   const [score, setScore] = useState(0)
   const [timeLeft, setTimeLeft] = useState(120)
   const [showResults, setShowResults] = useState(false)
-  const [timer, setTimer] = useState<number | null>(null)
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null)
 
   const { toast } = useToastHook()
   const addXP = useUserStore(state => state.addXP)

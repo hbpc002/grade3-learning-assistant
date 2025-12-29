@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>小学三年级学习助手</title>
-    <meta name="description" content="寓教于乐的小学三年级学习平台，包含数学、语文、科学课程，游戏化练习，视频教学" />
+    <meta name="description" content="寓教于乐的小学三年级学习平台，包含语文、数学、英语课程，游戏化练习，视频教学" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <style>
       * {
@@ -14,10 +14,11 @@
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background: #f8fafc;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
       }
 
       /* 儿童友好的字体大小 */
@@ -32,31 +33,142 @@
       }
 
       /* 加载动画 */
-      .loading {
+      .loading-container {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         height: 100vh;
+        color: white;
+        text-align: center;
+      }
+
+      .loading-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: bounce 2s infinite;
+      }
+
+      .loading-text {
         font-size: 1.5rem;
-        color: #3b82f6;
+        font-weight: bold;
+        margin-bottom: 1rem;
       }
 
-      .loading::after {
-        content: '...';
-        animation: dots 1.5s steps(4, end) infinite;
+      .loading-subtext {
+        font-size: 1rem;
+        opacity: 0.9;
       }
 
-      @keyframes dots {
-        0%, 20% { content: '.'; }
-        40% { content: '..'; }
-        60%, 100% { content: '...'; }
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 1.5rem 0;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      /* 错误提示 */
+      .error-message {
+        background: rgba(255,255,255,0.95);
+        color: #333;
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 20px;
+        max-width: 400px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
+
+      .error-message h3 {
+        color: #e53e3e;
+        margin-bottom: 10px;
+      }
+
+      .error-message p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
+
+      .retry-btn {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 10px;
+      }
+
+      .retry-btn:hover {
+        background: #5568d3;
       }
     </style>
   </head>
   <body>
     <div id="root">
-      <div class="loading">正在加载学习助手</div>
+      <div class="loading-container">
+        <div class="loading-logo">📚</div>
+        <div class="loading-text">正在加载学习助手</div>
+        <div class="spinner"></div>
+        <div class="loading-subtext">请稍候，正在准备学习内容...</div>
+      </div>
     </div>
+
     <script type="module" src="/src/main.tsx"></script>
+
+    <script>
+      // GitHub Pages 兼容性检查
+      (function() {
+        // 检测是否长时间未加载
+        let loadTimeout;
+
+        function showErrorMessage() {
+          const root = document.getElementById('root');
+          root.innerHTML = `
+            <div class="loading-container">
+              <div class="loading-logo">📚</div>
+              <div class="error-message">
+                <h3>⚠️ 加载失败</h3>
+                <p>如果页面长时间未加载，可能是以下原因：</p>
+                <p>1. 网络连接问题</p>
+                <p>2. GitHub Pages 服务延迟</p>
+                <p>3. 浏览器缓存问题</p>
+                <button class="retry-btn" onclick="window.location.reload()">🔄 刷新页面</button>
+                <button class="retry-btn" onclick="window.location.href='/'" style="margin-left: 10px; background: #48bb78;">🏠 返回首页</button>
+              </div>
+            </div>
+          `;
+        }
+
+        // 10秒后如果还未加载完成，显示错误信息
+        loadTimeout = setTimeout(showErrorMessage, 10000);
+
+        // 监听页面加载事件
+        window.addEventListener('load', function() {
+          clearTimeout(loadTimeout);
+        });
+
+        // 如果是 GitHub Pages 的 404 页面，自动重定向
+        if (window.location.pathname.includes('404')) {
+          setTimeout(function() {
+            window.location.href = window.location.origin + '/';
+          }, 2000);
+        }
+      })();
+    </script>
   </body>
 </html>

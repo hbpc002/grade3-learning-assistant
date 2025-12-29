@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小学三年级学习助手 - 加载中...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .loading {
+            margin: 25px 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .tips {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #666;
+            text-align: left;
+        }
+
+        .tips strong {
+            color: #333;
+        }
+
+        .auto-redirect {
+            margin-top: 15px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #5568d3;
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">📚</div>
+        <h1>小学三年级学习助手</h1>
+
+        <div class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">正在加载学习助手...</div>
+        </div>
+
+        <div class="tips">
+            <strong>💡 加载提示：</strong><br>
+            1. 首次加载可能需要几秒钟<br>
+            2. 如果长时间未加载，请检查网络连接<br>
+            3. 或者点击下面的按钮手动刷新
+        </div>
+
+        <button class="button" onclick="window.location.reload()">🔄 刷新页面</button>
+
+        <div class="auto-redirect">
+            自动跳转中...
+        </div>
+    </div>
+
+    <script>
+        // GitHub Pages SPA 路由修复
+        (function() {
+            // 存储当前路径
+            const path = window.location.pathname;
+
+            // 如果是 404 页面，尝试重定向到根目录并保留哈希
+            if (path.includes('404')) {
+                setTimeout(() => {
+                    // 尝试重定向到根目录
+                    const newPath = window.location.origin + '/';
+                    window.location.href = newPath;
+                }, 2000);
+            }
+
+            // 如果访问的是子路径但页面不存在，也重定向到根目录
+            setTimeout(() => {
+                // 检查页面是否已加载
+                const loadingText = document.querySelector('.loading-text');
+                if (loadingText) {
+                    loadingText.textContent = '如果页面未自动加载，请点击刷新按钮';
+                }
+
+                // 5秒后显示手动操作提示
+                setTimeout(() => {
+                    const redirectDiv = document.querySelector('.auto-redirect');
+                    if (redirectDiv) {
+                        redirectDiv.innerHTML = '如果页面未加载，请手动点击上方刷新按钮<br>或访问根目录: ' + window.location.origin + '/';
+                    }
+                }, 5000);
+            }, 3000);
+        })();
+    </script>
+</body>
+</html>
